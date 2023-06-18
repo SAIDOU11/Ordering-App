@@ -1,6 +1,6 @@
 html,
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   min-width: 280px;
   max-width: 412px;
@@ -51,12 +51,11 @@ p {
 }
 
 .emoji-size {
-  line-height: 100px;
-  height: 90px;
-  width: 75px;
+  font-size: 55px;
 }
 
 #details {
+  margin-left: 10px;
   width: 70%;
 }
 
