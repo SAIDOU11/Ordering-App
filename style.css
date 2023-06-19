@@ -2,6 +2,7 @@ html,
 body {
   margin: 0 auto;
   padding: 0;
+  /* height: 100vh; */
   min-width: 280px;
   max-width: 412px;
   font-family: "Smythe", cursive;
@@ -15,6 +16,11 @@ header {
   position: relative;
 }
 
+main {
+  position: relative;
+  height: 700px;
+}
+
 h1 {
   font-size: 25px;
   margin: 15px 0 0 0;
@@ -23,16 +29,19 @@ h1 {
 
 h3 {
   font-size: 22px;
-  margin-left: 10px;
-  margin: 15px 0 10px 10px;
 }
 
+details {
+  margin: 15px 0 10px 15px;
+}
+#command-btn {
+  font-size: 20px;
+}
 button {
   cursor: pointer;
   border: none;
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  width: 100%;
   color: gray;
 }
 
@@ -72,12 +81,19 @@ button:active {
 }
 
 .emoji-size {
-  font-size: 45px;
+  font-size: 40px;
 }
 
 #details {
-  margin-left: 10px;
+  margin: 10px 0 0 10px;
   width: 70%;
+}
+
+#details h3,
+.ingredients,
+.price {
+  margin: 0px;
+  padding-bottom: 5px;
 }
 
 #plus-btn {
@@ -93,19 +109,16 @@ button:active {
 
 .ingredients {
   color: #8b8b8b;
-  margin: 0 0 0 10px;
 }
 
 .price {
   justify-content: start;
   font-size: 20px;
   font-weight: 900;
-  margin: 5px 0 25px 10px;
 }
 
 #order {
   margin: 0 auto;
-  border-bottom: 2px solid black;
   padding-bottom: 20px;
   width: 85%;
 }
@@ -113,30 +126,32 @@ button:active {
 .command-order {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  height: 35px;
+  height: 40px;
 }
 
 .order {
   text-align: center;
+  font-weight: 400;
 }
 
-.name-hidden,
+.name-hidden {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
 #price {
   display: flex;
   justify-content: start;
   align-items: end;
 }
 
-.name-hidden {
-  gap: 15px;
-  padding: 0;
-}
-
 .remove {
-  color: gray;
-  font-size: 14px;
-  margin-bottom: 12px;
+  cursor: pointer;
+  padding-left: 10px;
+  color: #bbbbbb;
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .price-order {
@@ -148,18 +163,68 @@ button:active {
 .total-price {
   display: flex;
   justify-content: space-between;
-  width: 85%;
-  margin: 0px auto 10px;
+  margin: 15px auto 50px;
+  border-top: 2px solid black;
   font-size: 20px;
   font-weight: 900;
 }
 
-#order-btn {
+#order-btn,
+#pay-btn {
   display: block;
   margin: 0 auto;
-  width: 85%;
   border-radius: 5px;
+  padding: 10px;
+  border: none;
   color: #fff;
   background-color: #16db99;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+dialog {
+  position: absolute;
+  border: none;
+  border-radius: 5px;
+  /* width: 300px;
+  height: 300px; */
+}
+
+.dialog {
+  background-color: #fff;
+  width: 85%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.dialog h1 {
+  margin-bottom: 10px;
+}
+
+input {
+  width: 80%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+#pay-btn {
+  margin-top: 10px;
+  width: 85%;
+  font-size: 18px;
+}
+
+.thanks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 45px auto 100px;
+  background-color: #ecfdf5;
+  width: 85%;
+  height: 100px;
+  text-align: center;
+  color: #065f46;
+  font-size: 25px;
+}
+
+.hidden {
+  display: none;
 }

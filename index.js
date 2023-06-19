@@ -1,14 +1,33 @@
 import { menuArray } from "./data.js";
 
-console.log(menuArray);
+const modal = document.querySelector(".dialog");
+const orderBtn = document.getElementById("order-btn");
+const pay = document.getElementById("pay-btn");
+let addToOrder = document.getElementById("order");
+document.addEventListener("click", (e) => {
+  if (e.target.id === "command-btn") {
+    console.log("BOUTON ");
+
+    addToOrder.classList.remove("hidden");
+  } else if (e.target.id === "order-btn") {
+    modal.showModal();
+  } else if (e.target.id === "pay-btn") {
+    console.log("PAY");
+    const input = document.getElementsByTagName("input");
+    if (!input.value) {
+      console.log(input);
+      modal.close();
+      const thanks = document.querySelector(".thanks");
+      addToOrder.classList.add("hidden");
+      thanks.classList.remove("hidden");
+    }
+  }
+});
 
 function getDivHtml() {
   let commandHtml = "";
   menuArray.forEach((meal) => {
-    console.log(meal.ingredients);
-    meal.ingredients.forEach((furniture) => {
-      console.log(furniture);
-    });
+    meal.ingredients.forEach((furniture) => {});
     commandHtml += `
         <div class="command">
           <div id="emoji">
@@ -20,8 +39,8 @@ function getDivHtml() {
             <p data-price class="price">$${meal.price}</p>
           </div>
           <div id="plus-btn">
-          <button>
-          <i class="data-plus fa-solid fa-plus"></i>
+          <button id="command-btn">
+          +
         </button>
           </div>
         </div>
