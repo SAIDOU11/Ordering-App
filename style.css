@@ -114,7 +114,7 @@ button:active {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  height: 40px;
+  height: 35px;
 }
 
 .order {
@@ -149,7 +149,7 @@ button:active {
   display: flex;
   justify-content: space-between;
   width: 85%;
-  margin: 15px auto 10px;
+  margin: 0px auto 10px;
   font-size: 20px;
   font-weight: 900;
 }
