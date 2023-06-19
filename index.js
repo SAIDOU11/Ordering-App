@@ -15,9 +15,9 @@ function getDivHtml() {
             <p class="emoji-size">${meal.emoji}</p>
           </div>
           <div id="details">
-            <h3>${meal.name}</h3>
+            <h3 data-name>${meal.name}</h3>
             <p class="ingredients">${meal.ingredients}</p>
-            <p class="price">$${meal.price}</p>
+            <p data-price class="price">$${meal.price}</p>
           </div>
           <div id="plus-btn">
           <button>

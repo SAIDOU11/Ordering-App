@@ -44,6 +44,17 @@ button:active {
   color: red;
 }
 
+.command {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 0 auto;
+  border-bottom: 1px solid gray;
+  width: 85%;
+}
+
 .name-place {
   padding: 0;
   text-align: center;
@@ -54,17 +65,6 @@ button:active {
 .background {
   width: 100%;
   background-size: cover;
-}
-
-.command {
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  margin: 0 auto;
-  border-bottom: 1px solid gray;
-  width: 85%;
 }
 
 #emoji {
@@ -101,4 +101,65 @@ button:active {
   font-size: 20px;
   font-weight: 900;
   margin: 5px 0 25px 10px;
+}
+
+#order {
+  margin: 0 auto;
+  border-bottom: 2px solid black;
+  padding-bottom: 20px;
+  width: 85%;
+}
+
+.command-order {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  height: 40px;
+}
+
+.order {
+  text-align: center;
+}
+
+.name-hidden,
+#price {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
+.name-hidden {
+  gap: 15px;
+  padding: 0;
+}
+
+.remove {
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.price-order {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 15px auto 10px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+#order-btn {
+  display: block;
+  margin: 0 auto;
+  width: 85%;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #16db99;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
