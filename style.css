@@ -155,7 +155,7 @@ button:active {
   align-items: end;
 }
 
-.remove {
+#remove {
   cursor: pointer;
   padding-left: 10px;
   color: #bbbbbb;
@@ -199,14 +199,14 @@ dialog {
   height: 300px; */
 }
 
-.dialog {
+#dialog {
   background-color: #fff;
-  width: 85%;
+  /* width: 85%; */
   text-align: center;
   padding: 10px 0;
 }
 
-.dialog h1 {
+#dialog h1 {
   margin-bottom: 10px;
 }
 

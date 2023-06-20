@@ -1,27 +1,31 @@
 import { menuArray } from "./data.js";
 
-let sectionOrder = document.querySelector(".section-order");
-let orderMeal = document.getElementById("order-meal");
+const sectionOrder = document.querySelector(".section-order");
+const orderMeal = document.getElementById("order-meal");
+const modal = document.getElementById("dialog");
+const input = document.getElementsByTagName("input");
 
 document.addEventListener("click", (e) => {
+  console.log(e);
   if (e.target.dataset.add) {
     console.log("Numéro ID du repas - ", e.target.dataset.add);
-    // console.log("BOUTON ", orderMeal);
+    getOrder(e.target.dataset.add);
     orderMeal.classList.remove("hidden");
     sectionOrder.classList.remove("hidden");
-    return getOrder(e.target.dataset.add);
-    // } else if (e.target.id === "order-btn") {
-    //   modal.showModal();
-    // } else if (e.target.id === "pay-btn") {
-    //   console.log("PAY");
-    //   const input = document.getElementsByTagName("input");
-    //   if (!input.value) {
-    //     console.log(input);
-    //     modal.close();
-    //     const thanks = document.querySelector(".thanks");
-    //     addToOrder.classList.add("hidden");
-    //     thanks.classList.remove("hidden");
-    //   }
+  } else if (e.target.id === "remove") {
+    console.log("remove", e);
+  } else if (e.target.id === "order-btn") {
+    modal.showModal();
+    orderMeal.classList.add("hidden");
+    sectionOrder.classList.add("hidden");
+  } else if (!input.value && e.target.id === "pay-btn") {
+    console.log(input, "PAY");
+    modal.close();
+    const thanks = document.querySelector(".thanks");
+    thanks.classList.remove("hidden");
+    return setTimeout(function () {
+      window.location.reload();
+    }, 5000);
   }
 });
 
@@ -55,36 +59,45 @@ function render() {
 }
 render();
 
-function getOrder() {
+function getOrder(tweetId) {
+  console.log(tweetId);
   let orderHtml = "";
-  for (let meal of menuArray) {
-    orderHtml += `
+  const targetMealId = menuArray.filter((meal) => {
+    return tweetId == meal.id;
+  })[0];
+
+  console.log(targetMealId);
+
+  orderHtml += `
     <div id="order-content" class=" command-order">
           <div class="name-hidden">
-            <h3> ${meal.name} <span class="remove">remove</span></h3>
+            <h3> ${targetMealId.name} <span id="remove">remove</span></h3>
           </div>
           <div id="price">
-            <p class="price-order">$${meal.price}</p>
+            <p class="price-order">$${targetMealId.price}</p>
           </div>
           </div>
     `;
-  }
-  return (document.getElementById("order-meal").innerHTML = orderHtml);
+
+  return (document.getElementById("order-meal").innerHTML += orderHtml);
 }
 
-// function renderTotal() {
-//   let totalHtml = "";
-//   totalHtml = `
-//   <div class=" total-price">
-//   <div class="total">
-//     <p>Total price:</p>
-//   </div>
-//   <div class="total">
-//     <p>$</p>
-//   </div>
-// </div>
+// function removeMeal() {}
 
-// `;
-//   totalHtml;
 // }
-// renderTotal();
+
+function renderTotal() {
+  let totalHtml = "";
+  totalHtml = `
+  <div class="total">
+    <p>Total price:</p>
+  </div>
+  <div class="total">
+    <p>$</p>
+  </div>
+
+
+`;
+  document.querySelector(".total-price").innerHTML = totalHtml;
+}
+renderTotal();
