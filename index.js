@@ -1,15 +1,17 @@
 import { menuArray } from "./data.js";
 
+let priceTotal = JSON.parse(localStorage.getItem("price"));
+let cart = JSON.parse(localStorage.getItem("cart"));
+
 const sectionOrder = document.querySelector(".section-order");
 const orderMeal = document.getElementById("order-meal");
 const modal = document.getElementById("dialog");
 const input = document.getElementsByTagName("input");
 
 document.addEventListener("click", (e) => {
-  console.log(e);
   if (e.target.dataset.add) {
-    console.log("Numéro ID du repas - ", e.target.dataset.add);
     getOrder(e.target.dataset.add);
+    addToCart(e.target.dataset.add);
     orderMeal.classList.remove("hidden");
     sectionOrder.classList.remove("hidden");
   } else if (e.target.id === "remove") {
@@ -74,7 +76,7 @@ function getOrder(tweetId) {
             <h3> ${targetMealId.name} <span id="remove">remove</span></h3>
           </div>
           <div id="price">
-            <p class="price-order">$${targetMealId.price}</p>
+            <p data-price="${targetMealId.price}" class="price-order">$${targetMealId.price}</p>
           </div>
           </div>
     `;
@@ -86,18 +88,23 @@ function getOrder(tweetId) {
 
 // }
 
-function renderTotal() {
+function addToCart(tweetId) {
+  console.log(tweetId);
+
+  const totalMeal = menuArray.filter((meal) => {
+    return tweetId == meal.id;
+  })[0];
+
   let totalHtml = "";
-  totalHtml = `
+  totalHtml += `
   <div class="total">
     <p>Total price:</p>
   </div>
   <div class="total">
-    <p>$</p>
+    <p>$${totalMeal.price}</p>
   </div>
 
-
-`;
+  `;
+  console.log(totalHtml);
   document.querySelector(".total-price").innerHTML = totalHtml;
 }
-renderTotal();
