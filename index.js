@@ -1,16 +1,10 @@
 import { menuArray } from "./data.js";
 
-let priceTotal = JSON.parse(localStorage.getItem("price"));
-let cart = JSON.parse(localStorage.getItem("cart"));
-
-const commandOrder = document.getElementsByClassName("command-order");
 const sectionOrder = document.querySelector(".section-order");
 const orderMeal = document.getElementById("order-meal");
 const modal = document.getElementById("dialog");
 const input = document.getElementsByTagName("input");
 
-console.log(orderMeal);
-console.log(sectionOrder);
 document.addEventListener("click", (e) => {
   if (e.target.dataset.add) {
     getOrder(e.target.dataset.add);
@@ -21,18 +15,18 @@ document.addEventListener("click", (e) => {
     let removeClicked = e.target;
     let removeParents = removeClicked.parentElement.parentElement.parentElement;
     removeParents.remove();
+    updateTotal();
   } else if (e.target.id === "order-btn") {
     modal.showModal();
     orderMeal.classList.add("hidden");
     sectionOrder.classList.add("hidden");
   } else if (!input.value && e.target.id === "pay-btn") {
-    console.log(input, "PAY");
     modal.close();
     const thanks = document.querySelector(".thanks");
     thanks.classList.remove("hidden");
     return setTimeout(function () {
       window.location.reload();
-    }, 5000);
+    }, 3000);
   }
 });
 
@@ -67,13 +61,10 @@ function render() {
 render();
 
 function getOrder(tweetId) {
-  console.log(tweetId);
   let orderHtml = "";
   const targetMealId = menuArray.filter((meal) => {
     return tweetId == meal.id;
   })[0];
-
-  console.log(targetMealId);
 
   orderHtml += `
     <div id="order-content" class=" command-order">
@@ -89,18 +80,21 @@ function getOrder(tweetId) {
   return (document.getElementById("order-meal").innerHTML += orderHtml);
 }
 
-function updateTotal(tweetId) {
-  console.log(tweetId);
-  let cartItemContainer = document.getElementById("order").children[1];
-
-  let getPrice = cartItemContainer.children[0].children[1];
-
-  let pricePlace = getPrice;
-  console.log(pricePlace);
-
-  const totalMeal = menuArray.filter((meal) => {
-    return tweetId == meal.id;
-  })[0];
+function updateTotal() {
+  let mealCart = document.getElementsByClassName("meal-cart")[0];
+  let total = 0;
+  let cartCommand = mealCart.getElementsByClassName("command-order");
+  for (let i = 0; i < cartCommand.length; i++) {
+    let oneMeal = cartCommand[i];
+    let priceElement = oneMeal.getElementsByClassName("price-order")[0];
+    let quantity = cartCommand.length;
+    let price = parseFloat(priceElement.innerText.replace("$", ""));
+    total += price;
+    total = total + quantity - cartCommand.length;
+    if (cartCommand.length === 0) {
+      return sectionOrder.classList.add("hidden");
+    }
+  }
 
   let totalHtml = "";
   totalHtml += `
@@ -108,10 +102,10 @@ function updateTotal(tweetId) {
     <p>Total price:</p>
   </div>
   <div class="total">
-    <p>$${totalMeal.price}</p>
+    <p class="total-price">$${total}</p>
   </div>
 
   `;
-  console.log(totalHtml);
+
   document.querySelector(".total-price").innerHTML = totalHtml;
 }
