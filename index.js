@@ -3,19 +3,24 @@ import { menuArray } from "./data.js";
 let priceTotal = JSON.parse(localStorage.getItem("price"));
 let cart = JSON.parse(localStorage.getItem("cart"));
 
+const commandOrder = document.getElementsByClassName("command-order");
 const sectionOrder = document.querySelector(".section-order");
 const orderMeal = document.getElementById("order-meal");
 const modal = document.getElementById("dialog");
 const input = document.getElementsByTagName("input");
 
+console.log(orderMeal);
+console.log(sectionOrder);
 document.addEventListener("click", (e) => {
   if (e.target.dataset.add) {
     getOrder(e.target.dataset.add);
-    addToCart(e.target.dataset.add);
-    orderMeal.classList.remove("hidden");
+    updateTotal(e.target.dataset.add);
     sectionOrder.classList.remove("hidden");
+    orderMeal.classList.remove("hidden");
   } else if (e.target.id === "remove") {
-    console.log("remove", e);
+    let removeClicked = e.target;
+    let removeParents = removeClicked.parentElement.parentElement.parentElement;
+    removeParents.remove();
   } else if (e.target.id === "order-btn") {
     modal.showModal();
     orderMeal.classList.add("hidden");
@@ -84,12 +89,14 @@ function getOrder(tweetId) {
   return (document.getElementById("order-meal").innerHTML += orderHtml);
 }
 
-// function removeMeal() {}
-
-// }
-
-function addToCart(tweetId) {
+function updateTotal(tweetId) {
   console.log(tweetId);
+  let cartItemContainer = document.getElementById("order").children[1];
+
+  let getPrice = cartItemContainer.children[0].children[1];
+
+  let pricePlace = getPrice;
+  console.log(pricePlace);
 
   const totalMeal = menuArray.filter((meal) => {
     return tweetId == meal.id;
